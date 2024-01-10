@@ -1,0 +1,24 @@
+.Menu {
+    height: 50%;
+}
+.Menu > a {
+    text-decoration: none;
+    color: black;
+}
+
+.myCategories {
+    height: 50%;
+    overflow: auto;
+}
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.category-list li {
+    margin-bottom: 5px; /* Adjust as needed */
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,23 @@
+.AddSongForm {
+  /* AddSongForm container styles */
+}
+
+.AddSongForm hr {
+  border: 0.5px solid #ccc;
+  margin: 20px 0;
+}
+
+.AddSongForm img {
+  max-width: 100%;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.AddSongForm h2 {
+  color: #333;
+}
+
+.AddSongForm h3 {
+  color: #666;
+}
