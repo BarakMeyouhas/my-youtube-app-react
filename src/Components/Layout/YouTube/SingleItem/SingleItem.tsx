@@ -53,7 +53,7 @@ function SingleItem(props: itemProps): JSX.Element {
     const fetchFavoriteSongs = async () => {
       try {
         const response = await axios.get(
-          "https://my-youtube-app-database-a8a16796b967.herokuapp.com//api/v1/youtube/favoriteSongs"
+          "https://my-youtube-app-database-a8a16796b967.herokuapp.com/api/v1/youtube/favoriteSongs"
         );
         const favoriteSongs = response.data;
         setIsLiked(
