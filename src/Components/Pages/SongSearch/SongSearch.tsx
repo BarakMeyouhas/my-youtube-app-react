@@ -3,11 +3,10 @@ import Song from "../../modal/Song";
 import { youtube } from "../../Redux/Store";
 import { ChangeEvent, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import SingleItem from "../../Layout/YouTube/SingleItem/SingleItem";
 import axios from "axios";
+import SearchSingleItem from "./SearchSingleItem/SearchSingleItem";
 
 function SongSearch(): JSX.Element {
-  const allSongs = youtube.getState().songs.allSongs;
   const [searchValue, setSearchValue] = useState("");
   const [filteredSongs, setFilteredSongs] = useState<Song[]>([]);
   const apiKey = "AIzaSyBKQzeoMIHA942XqOho1fwPedksQ5fps2s";
@@ -15,7 +14,6 @@ function SongSearch(): JSX.Element {
   const apiURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=${apiKey}&type=video&q=${searchValue}&maxResults=20`;
 
   const handleSearch = () => {
-    console.log(searchValue);
     axios.get(apiURL).then((response) => {
       const items = response.data.items;
       const newFilteredSongs: Song[] = items.map((item: any) => ({
@@ -26,13 +24,24 @@ function SongSearch(): JSX.Element {
         url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         categoryName: "Your Category",
       }));
+
+      // Example: Logging the URL of the first video in the response
+      if (items.length > 0) {
+        const firstVideoId = items[0].id.videoId;
+        const firstVideoURL = `https://www.youtube.com/watch?v=${firstVideoId}`;
+        console.log(firstVideoURL);
+      }
+
       setFilteredSongs(newFilteredSongs);
-      console.log(items.url);
     });
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
+  };
+
+  const handleSongClick = (videoURL: string) => {
+    console.log(`Clicked on song with URL: ${videoURL}`);
   };
 
   return (
@@ -72,7 +81,7 @@ function SongSearch(): JSX.Element {
 
       <div>
         {filteredSongs.map((song) => (
-          <SingleItem
+          <SearchSingleItem
             key={song.id}
             url={song.url}
             title={song.title}
@@ -82,6 +91,7 @@ function SongSearch(): JSX.Element {
             categoryName={song.categoryName}
             category={0}
             isFavorite={false}
+            onSongClick={handleSongClick} // Pass the callback
           />
         ))}
       </div>

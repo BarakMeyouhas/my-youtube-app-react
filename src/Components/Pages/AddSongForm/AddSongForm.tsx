@@ -2,34 +2,45 @@ import { useState, useEffect } from "react";
 import "./AddSongForm.css";
 import axios from "axios";
 import Song from "../../modal/Song";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { youtube } from "../../Redux/Store";
 import { addSongAction } from "../../Redux/SongReducer";
 import { downloadCategoryAction } from "../../Redux/CategoriesReducer";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
-import {
-  TextField,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
-} from "@mui/material";
+import { TextField, Select, MenuItem } from "@mui/material";
 import { Category } from "../../modal/Category";
 
 function AddSongForm(): JSX.Element {
   const [refresh, setRefresh] = useState(false);
+  const [videoURL, setVideoURL] = useState<string>("");
+
 
   useEffect(() => {
     if (youtube.getState().category.categories.length < 1) {
       axios
-        .get("https://my-youtube-app-database-a8a16796b967.herokuapp.com/api/v1/youtube/catList")
+        .get(
+          "https://my-youtube-app-database-a8a16796b967.herokuapp.com/api/v1/youtube/catList"
+        )
         .then((response) => response.data)
         .then((result) => {
           youtube.dispatch(downloadCategoryAction(result));
           setRefresh(true);
         });
     }
+  }, []);
+
+  useEffect(() => {
+    const queryParameters = new URLSearchParams(window.location.search)
+
+    if (queryParameters){
+      const videoURLParam = queryParameters.get("params");
+      setVideoURL(videoURLParam || "");
+    } else {
+      return;
+    }
+    
+    
   }, []);
 
   const [songURL, setURL] = useState("");
@@ -104,6 +115,7 @@ function AddSongForm(): JSX.Element {
         type="url"
         label="Song URL"
         variant="outlined"
+        value={videoURL}
         onKeyUp={(e) => setURL((e.target as HTMLInputElement).value)}
       />
       <Button
