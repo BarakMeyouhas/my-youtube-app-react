@@ -1,15 +1,24 @@
 import { useParams } from "react-router-dom";
 import "./Player.css";
-import { Container, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
+import { youtube } from "../../Redux/Store";
+import { useEffect } from "react";
 
 function Player(): JSX.Element {
   const params = useParams();
+
+  const addSong = () =>{
+    console.log("addSong clicked");
+  }
 
   return (
     <Container className="Player">
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <h1>{params.title}</h1>
+          <Button onClick={addSong} variant="contained" color="primary">
+            Add Song
+          </Button>
           <hr />
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={4}>
