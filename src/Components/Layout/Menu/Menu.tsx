@@ -59,23 +59,13 @@ export function Menu({open,handleDrawerToggle,}
           </ListItem>
           <ListItem
             component={MyNavLink}
-            to="/addSong"
-            activeClassName="active"
-          >
-            <ListItemIcon>
-              <AddCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Add Song" />
-          </ListItem>
-          <ListItem
-            component={MyNavLink}
             to="/addCategory"
             activeClassName="active"
           >
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
-            <ListItemText primary="Add Category" />
+            <ListItemText primary="Category Management" />
           </ListItem>
           <ListItem component={MyNavLink} to="/search" activeClassName="active">
             <ListItemIcon>

@@ -29,7 +29,6 @@ function SongSearch(): JSX.Element {
       if (items.length > 0) {
         const firstVideoId = items[0].id.videoId;
         const firstVideoURL = `https://www.youtube.com/watch?v=${firstVideoId}`;
-        console.log(firstVideoURL);
       }
 
       setFilteredSongs(newFilteredSongs);
@@ -41,7 +40,6 @@ function SongSearch(): JSX.Element {
   };
 
   const handleSongClick = (videoURL: string) => {
-    console.log(`Clicked on song with URL: ${videoURL}`);
   };
 
   return (
